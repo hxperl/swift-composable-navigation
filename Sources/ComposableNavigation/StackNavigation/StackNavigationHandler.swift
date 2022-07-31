@@ -27,9 +27,6 @@ public class StackNavigationHandler<ViewProvider: ViewProviding>: NSObject, UINa
 	
 	public func setup(with navigationController: UINavigationController) {
 		navigationController.delegate = self
-    navigationController.isNavigationBarHidden = true
-    navigationController.navigationBar.isHidden = true
-		
 		cancellable = viewStore.publisher
 			.sink { [weak self, weak navigationController] in
 				guard let self = self, let navigationController = navigationController else { return }
@@ -57,7 +54,7 @@ public class StackNavigationHandler<ViewProvider: ViewProviding>: NSObject, UINa
 		)
 		
 		navigationController.setViewControllers(
-			Array(currentViewControllerItems.values),
+      Array(currentViewControllerItems.values),
 			animated: shouldAnimateStackChanges(for: navigationController, state: newState)
 		)
 	}

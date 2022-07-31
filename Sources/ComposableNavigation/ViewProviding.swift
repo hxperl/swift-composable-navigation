@@ -8,7 +8,7 @@ public protocol ViewProviding {
 
 public extension ViewProviding {
 	func makeViewController(for navigationItem: Item) -> UIViewController {
-		makePresentable(for: navigationItem).viewController
+    makePresentable(for: navigationItem).viewController
 	}
 }
 
@@ -24,6 +24,14 @@ extension UIViewController: Presentable {
 
 extension View where Self: Presentable {
 	public var viewController: UIViewController {
-		UIHostingController(rootView: self)
+    BaseHostingViewController(rootView: self)
 	}
+}
+
+class BaseHostingViewController<Content: View>: UIHostingController<Content> {
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    self.navigationController?.isNavigationBarHidden = true
+    self.navigationController?.navigationBar.isHidden = true
+  }
 }
