@@ -21,4 +21,9 @@ public class StackNavigationViewController<ViewProvider: ViewProviding>: UINavig
 	public required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+  public override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    self.isNavigationBarHidden = true
+  }
 }
